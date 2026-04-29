@@ -1,113 +1,91 @@
-import { useState } from "react"; // Hook para manejar estados
+import { useState } from "react";
 
-// Tipos de caracteres disponibles
 const minusculas = "abcdefghijklmnopqrstuvwxyz";
 const mayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const numeros = "0123456789";
 const especiales = "!@#$%^&*()_+-=[]{}|;:,.<>?";
-// Más especiales que antes, igual que el código de referencia
 
 export default function Generador({ alGenerar }) {
-  // Recibe una función del componente padre
-
   const [config, setConfig] = useState({
-    longitud: 12, // Longitud inicial
+    longitud: 12,
     usarMinusculas: true,
     usarMayusculas: true,
     usarNumeros: true,
     usarEspeciales: false,
   });
-  // Un solo objeto de configuración en lugar de 5 estados separados
-  // Más prolijo y fácil de manejar
 
-  const [error, setError] = useState(""); // Guarda mensajes de error
+  const [error, setError] = useState("");
 
-  function generarContrasena() { // Función que genera la contraseña
-    let conjunto = ""; // Acá se juntan todos los caracteres posibles
-
+  function generarContrasena() {
+    let conjunto = "";
     if (config.usarMinusculas) conjunto += minusculas;
     if (config.usarMayusculas) conjunto += mayusculas;
     if (config.usarNumeros) conjunto += numeros;
     if (config.usarEspeciales) conjunto += especiales;
 
-    if (conjunto === "") { // Si no eligió ninguna opción
+    if (conjunto === "") {
       setError("Elegí al menos una opción");
-      return; // Corta la ejecución
+      return;
     }
 
-    setError(""); // Limpia el error
-
+    setError("");
     let resultado = "";
-    for (let i = 0; i < config.longitud; i++) { // Genera carácter por carácter
-      let indice = Math.floor(Math.random() * conjunto.length); // Índice aleatorio
-      resultado += conjunto[indice]; // Agrega el carácter al resultado
+    for (let i = 0; i < config.longitud; i++) {
+      const indice = Math.floor(Math.random() * conjunto.length);
+      resultado += conjunto[indice];
     }
-
-    alGenerar(resultado); // Devuelve la contraseña al componente padre
+    alGenerar(resultado);
   }
 
   return (
-    <div className="panel-generador">
-      <h3>Configurar generador</h3>
-
-      {/* Longitud */}
+    <div className="generador-container">
       <div className="control-longitud">
-        <p>Longitud: {config.longitud}</p>
+        <label>Longitud: {config.longitud}</label>
         <input
           type="range"
-          min="4"
+          min="6"
           max="32"
           value={config.longitud}
-          onChange={(e) => setConfig({ ...config, longitud: Number(e.target.value) })}
-          // Spread operator: copia toda la config y solo cambia longitud
+          onChange={(e) => setConfig({ ...config, longitud: parseInt(e.target.value) })}
         />
       </div>
 
-      {/* Opciones de caracteres */}
       <div className="opciones-caracteres">
         <label>
           <input
             type="checkbox"
             checked={config.usarMinusculas}
             onChange={(e) => setConfig({ ...config, usarMinusculas: e.target.checked })}
-            // Copia la config y cambia solo usarMinusculas
-          />
-          Minúsculas
+          /> Minúsculas
         </label>
-
         <label>
           <input
             type="checkbox"
             checked={config.usarMayusculas}
             onChange={(e) => setConfig({ ...config, usarMayusculas: e.target.checked })}
-          />
-          Mayúsculas
+          /> Mayúsculas
         </label>
-
         <label>
           <input
             type="checkbox"
             checked={config.usarNumeros}
             onChange={(e) => setConfig({ ...config, usarNumeros: e.target.checked })}
-          />
-          Números
+          /> Números
         </label>
-
         <label>
           <input
             type="checkbox"
             checked={config.usarEspeciales}
             onChange={(e) => setConfig({ ...config, usarEspeciales: e.target.checked })}
-          />
-          Especiales
+          /> Especiales
         </label>
       </div>
 
-      {error !== "" && <p className="texto-error">{error}</p>} {/* Muestra error si hay */}
+      {error && <p className="texto-error">{error}</p>}
 
       <button className="btn-generar" onClick={generarContrasena}>
         Generar contraseña
-      </button> {/* Botón que dispara la generación */}
+      </button>
     </div>
   );
 }
