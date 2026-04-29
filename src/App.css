@@ -1,0 +1,121 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fondo general */
+body {
+  background-color: #0f0f1a;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* Contenedor principal */
+.contenedor-app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Tarjeta */
+.tarjeta {
+  background-color: #1a1a2e;
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 30px;
+  width: 400px;
+}
+
+/* Títulos */
+.titulo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.subtitulo {
+  text-align: center;
+  font-size: 14px;
+  color: gray;
+  margin-bottom: 20px;
+}
+
+/* Input */
+.input-contrasena {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  background-color: #12122a;
+  color: white;
+}
+
+/* Botón mostrar */
+.btn-toggle-mostrar {
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+/* Barra de seguridad */
+.barras-seguridad {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.barra {
+  height: 5px;
+  background-color: gray;
+  flex: 1;
+}
+
+/* Lista */
+.lista-requisitos {
+  margin-bottom: 15px;
+}
+
+.item-requisito {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* Botón copiar */
+.btn-copiar {
+  width: 100%;
+  padding: 10px;
+  background-color: purple;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+/* Botón generador */
+.btn-toggle-generador {
+  width: 100%;
+  padding: 10px;
+  border: 1px dashed gray;
+  background: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Panel generador */
+.panel-generador {
+  margin-top: 15px;
+  padding: 15px;
+  border: 1px solid #444;
+}
+
+/* Botón generar */
+.btn-generar {
+  width: 100%;
+  padding: 10px;
+  background-color: purple;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
